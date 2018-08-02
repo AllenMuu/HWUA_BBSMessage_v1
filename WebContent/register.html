@@ -1,0 +1,89 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<title>海文 在线短信平台</title>
+<link type="text/css" rel="stylesheet" href="css/sms.css" />
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript">
+   $(function(){
+	   var $error= $("#error");//查找 id="error"的元素
+	   var $name = $("#name");
+	   var $pwd = $("#pwd");
+	   var $affirm =$("#affirm");
+	   var $email =$("#email");
+	   var reg=/^[0-9A-Za-z]{2,}@[0-9A-Za-z]{2,}\.(com|cn|com\.cn)$/;//验证email的正则表达式
+	   $("#register").click(function(){
+		   if($name.val()==""){
+			   $error.html("用户名不能为空").removeClass().addClass("error");
+			   return false;
+		   }
+		   if($pwd.val()==""){
+			   $error.html("密码不能为空").removeClass().addClass("error");
+			   return false;
+		   }
+		   
+		   if($pwd.val()!=$affirm.val()){
+			   $error.html("两次密码不一致").removeClass().addClass("error");
+			   return false;
+		   }
+		   
+		   if($email.val()==""){
+			   $error.html("email不能为空").removeClass().addClass("error");
+			   return false;
+		   }
+		   
+		   if(reg.test($email.val())==false){
+			   $error.html("email格式不正确").removeClass().addClass("error");
+			   return false;//不提交表单
+		   }
+		   
+		   return true;//返回true就会提交表单
+	   });
+	   
+	 
+   })
+</script>
+
+<style type="text/css">
+  .error{
+    color:red;
+  }
+</style>
+</head>
+
+<body>
+	<div id="regTitle" class="png"></div>
+	<div id="regForm" class="userForm png">
+
+		<form action="user.do?param=register" method="post">
+			<dl>
+				<div id="error">错误信息</div>
+				<dt>用 户 名：</dt>
+				<dd>
+					<input type="text" name="name" id="name"/>
+				</dd>
+				<dt>密 码：</dt>
+				<dd>
+					<input type="password" name="pwd" id="pwd"/>
+				</dd>
+				<dt>确认密码：</dt>
+				<dd>
+					<input type="password" name="affirm" id="affirm"/>
+				</dd>
+				<dt>邮 箱：</dt>
+				<dd>
+					<input type="text" name="email"  id="email"/>
+				</dd>
+			</dl>
+			<div class="buttons">
+				<input class="btn-reg png" type="submit" name="register" value=" "  id="register"/><input
+					class="btn-reset png" type="reset" name="reset" value=" " />
+			</div>
+			<div class="goback">
+				<a href="index.html" class="png">返回登录页</a>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
